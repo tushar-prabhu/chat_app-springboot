@@ -78,36 +78,30 @@ a {
 }
 
 button {
-    box-shadow: none;
-    border: 1px solid transparent;
-    font-size: 14px;
+    border:none;
+    background:transparent;
+    color:white;
     outline: none;
-    line-height: 100%;
-    white-space: nowrap;
     vertical-align: middle;
     padding: 0.6rem 1rem;
-    border-radius: 2px;
+    border-radius: 5px;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-    min-height: 38px;
-    background-color: #00b712;
-    background-image: linear-gradient(315deg, #00b712 0%, #5aff15 74%);
 }
-
 button.default {
-    background-color: #e8e8e8;
+    background-color: transparent;
     color: #ffffff;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
 }
 
 button.primary {
-    background-color: #25be38;
+    background-color: transparent;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
 
 button.accent {
-    background-color: #1778dd;
+    background-color: transparent;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12);
     color: #fff;
 }
@@ -175,7 +169,7 @@ button.accent {
     line-height: 1.5rem;
     padding: 10px 20px;
     margin: 0;
-    border-bottom: 1px solid #f4f4f4;
+    /*border-bottom: 1px solid #f4f4f4;*/
 }
 
 #chat-page ul li p {
@@ -259,8 +253,23 @@ button.accent {
     top: 65px;
     width: 100%;
 }
+/* update */
+li span {
+    padding:5px 0;
+    border-radius: 5px;
+    drop-shadow:5px;
+}
+
+.own-message {
+    text-align: right;
+}
+
+.own-message i {
+    visibility:hidden !important;
+}
 
 
+/* update end  */
 @media screen and (max-width: 730px) {
 
     .chat-container {

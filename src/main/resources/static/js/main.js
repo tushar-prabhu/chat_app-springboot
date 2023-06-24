@@ -10,16 +10,22 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
+//mycode
+var password = null;
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
-    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+    '#ffc107', '#ff85af', '#FF9800', '#39bbb0',
+    '#fcba03', '#fc0303', '#de5454', '#b9de54',
+    '#54ded7', '#54ded7', '#1358d6', '#d611c6'
 ];
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
-
+    password = document.querySelector('#password').value;
+    console.log(password);
     if(username) {
+        if(password=="1234") {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
@@ -27,6 +33,12 @@ function connect(event) {
         stompClient = Stomp.over(socket);
 
         stompClient.connect({}, onConnected, onError);
+    }
+    else
+    {
+        let mes=document.getElementById('mes');
+        mes.innerText="Wrong password";
+    }
     }
     event.preventDefault();
 }
@@ -94,6 +106,9 @@ function onMessageReceived(payload) {
         var usernameText = document.createTextNode(message.sender);
         usernameElement.appendChild(usernameText);
         messageElement.appendChild(usernameElement);
+        // * update
+        usernameElement.style['color'] = getAvatarColor(message.sender);
+        //* update end
     }
 
     var textElement = document.createElement('p');
@@ -101,7 +116,11 @@ function onMessageReceived(payload) {
     textElement.appendChild(messageText);
 
     messageElement.appendChild(textElement);
-
+    // * update
+    if (message.sender === username) {
+            // Add a class to float the message to the right
+            messageElement.classList.add('own-message');
+        }// * update end
     messageArea.appendChild(messageElement);
     messageArea.scrollTop = messageArea.scrollHeight;
 }
