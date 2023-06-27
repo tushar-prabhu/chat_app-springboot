@@ -1,68 +1,124 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
     <title>Chat App | Spring Boot + WebSocket</title>
     <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body style="background-position: center; background-repeat: no-repeat; background-image: url('/images/space.jpg'); background-size: cover;">
-<noscript>
-    <h2>Please enable JavaScript in your browser!!!</h2>
-</noscript>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body
+    style="
+      background-position: center;
+      background-repeat: no-repeat;
+      background-image: url('/images/space.jpg');
+      background-size: cover;
+    "
+  >
+    <noscript>
+      <h2>Please enable JavaScript in your browser!!!</h2>
+    </noscript>
 
-<div id="username-page">
-    <div class="username-page-container">
+    <div id="username-page">
+      <div class="username-page-container">
         <h1 class="title">Enter your name</h1>
         <form id="usernameForm" name="usernameForm">
-            <div class="form-group">
-                <input type="text" id="name" placeholder="Name"
-                       autocomplete="off" class="form-control" />
-                <input type="password" id="password" placeholder="Password"
-                       autocomplete="off" class="form-control" />
-                <span id="mes" style="color:#ff0000;"></span>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="username-submit" style="color:#000000"><i class="fa-solid fa-right-to-bracket"></i> Enter</button>
-            </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="name"
+              placeholder="Name"
+              autocomplete="off"
+              class="form-control"
+              autofocus
+            />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              autocomplete="off"
+              class="form-control"
+            />
+            <span id="mes" style="color: #ff0000"></span>
+          </div>
+          <div class="form-group">
+            <button
+              type="submit"
+              class="username-submit"
+              style="color: #ffffff; background-color: green"
+            >
+              <i class="fa-solid fa-right-to-bracket"></i> Enter
+            </button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-<div id="chat-page" class="hidden">
-    <button onclick="location.href = location.href;">Logout</button>
-    <div class="chat-container">
+    <div id="chat-page" class="hidden">
+      <button
+        onclick="location.href = location.href;"
+        style="
+          position: absolute;
+          top: 0;
+          right: 0;
+          background-color: #ff0000;
+          z-index: 999;
+        "
+      >
+        Logout
+      </button>
+      <div class="chat-container">
         <div class="chat-header">
-            <h2>Group Chat</h2>
+          <h2>Group Chat</h2>
         </div>
         <div class="connecting">Connecting to the chat...</div>
-        <ul id="messageArea" style="background-color: rgba(0, 0, 0, 0.26);backdrop-filter: blur(10px);">
-
-        </ul>
+        <ul
+          id="messageArea"
+          style="
+            background-color: rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(10px);
+          "
+        ></ul>
         <form id="messageForm" name="messageForm" nameForm="messageForm">
-            <div class="form-group">
-                <div class="input-group clearfix">
-                    <input type="text" id="message" placeholder="Message"
-                           autocomplete="off" class="form-control" style="background-color:transparent;
-    backdrop-filter:blur(24px); color:#ffffff;"
-                    />
-                    <button type="submit" class="btn"><i class="fa-solid fa-paper-plane"></i> Send</button>
-                </div>
+          <div class="form-group">
+            <div class="input-group clearfix">
+              <input
+                type="text"
+                id="message"
+                placeholder="Message"
+                autocomplete="off"
+                autofocus
+                class="form-control"
+                style="
+                  background-color: transparent;
+                  backdrop-filter: blur(24px);
+                  color: #ffffff;
+                "
+              />
+              <button type="submit" class="btn">
+                <i class="fa-solid fa-paper-plane"></i> Send
+              </button>
             </div>
+          </div>
         </form>
+      </div>
     </div>
-</div>
 
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-<script src="/js/main.js"></script>
-<script type="text/javascript">
-    window.onbeforeunload = function() {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script type="text/javascript">
+      window.onbeforeunload = function () {
         return "Dude, are you sure you want to leave? Think of the kittens!";
-    }
-</script>
-</body>
+      };
+    </script>
+  </body>
 </html>
