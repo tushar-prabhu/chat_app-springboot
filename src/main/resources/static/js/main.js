@@ -36,7 +36,8 @@ function connect(event) {
   username = document.querySelector("#name").value.trim();
   password = document.querySelector("#password").value;
   if (username) {
-    if (password == "1234") {
+    //Enter your password
+    if (password == "<YOUR_PASSWORD>") {
       usernamePage.classList.add("hidden");
       chatPage.classList.remove("hidden");
 
