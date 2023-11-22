@@ -37,7 +37,7 @@ function connect(event) {
   password = document.querySelector("#password").value;
   if (username) {
     //Enter your password
-    if (password == "hello") {
+    if (password == "<YOUR_PASSWORD>") {
       usernamePage.classList.add("hidden");
       chatPage.classList.remove("hidden");
 
@@ -89,10 +89,6 @@ function send(event) {
   event.preventDefault();
 }
 
-/**
- * Handles the received message and updates the chat interface accordingly.
- * param {Object} payload - The payload containing the message data.
- */
 function onMessageReceived(payload) {
   var message = JSON.parse(payload.body);
 
